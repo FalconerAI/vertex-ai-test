@@ -7,11 +7,10 @@ const vertex = createVertexAnthropic({
   location: process.env.VERTEX_LOCATION!,
 });
 
-const modelId = process.argv[2] ?? 'claude-sonnet-4-6';
-console.log(`Streaming ${modelId}...`);
+console.log(`Streaming claude-sonnet-4-6...`);
 
 const result = streamText({
-  model: vertex(modelId),
+  model: vertex('claude-sonnet-4-6'),
   prompt: 'Write a haiku about cloud computing.',
   maxTokens: 100,
   headers: { 'anthropic-beta': 'context-1m-2025-08-07' },
