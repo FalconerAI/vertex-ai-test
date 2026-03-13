@@ -7,7 +7,7 @@ const vertex = createVertexAnthropic({
   location: process.env.VERTEX_LOCATION!,
 });
 
-const models = ['claude-sonnet-4-6', 'claude-haiku-4-5@20251001'];
+const models = ['claude-opus-4-6', 'claude-sonnet-4-6', 'claude-haiku-4-5@20251001'];
 
 for (const modelId of models) {
   console.log(`Testing ${modelId}...`);
