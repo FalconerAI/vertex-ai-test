@@ -7,18 +7,22 @@ const vertex = createVertexAnthropic({
   location: process.env.VERTEX_LOCATION!,
 });
 
-console.log(`Streaming claude-sonnet-4-6...`);
+const models = ['claude-opus-4-6', 'claude-sonnet-4-6', 'claude-haiku-4-5@20251001'];
 
-const result = streamText({
-  model: vertex('claude-sonnet-4-6'),
-  prompt: 'Write a haiku about cloud computing.',
-  maxTokens: 100,
-  headers: { 'anthropic-beta': 'context-1m-2025-08-07' },
-});
+for (const modelId of models) {
+  console.log(`Streaming ${modelId}...`);
 
-for await (const chunk of result.textStream) {
-  process.stdout.write(chunk);
+  const result = streamText({
+    model: vertex(modelId),
+    prompt: 'Say "hello" in one word.',
+    maxTokens: 10,
+    headers: { 'anthropic-beta': 'context-1m-2025-08-07' },
+  });
+
+  for await (const chunk of result.textStream) {
+    process.stdout.write(chunk);
+  }
+
+  const usage = await result.usage;
+  console.log(`\n  ✅ ${usage.promptTokens} in / ${usage.completionTokens} out`);
 }
-
-const usage = await result.usage;
-console.log(`\n✅ ${usage.promptTokens} in / ${usage.completionTokens} out`);
