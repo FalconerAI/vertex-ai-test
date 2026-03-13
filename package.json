@@ -1,0 +1,20 @@
+{
+  "name": "vertex-ai-test",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "tsx test.ts",
+    "test:stream": "tsx test-stream.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^1.2.10",
+    "@ai-sdk/google-vertex": "2.2.12",
+    "ai": "^4.3.19",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
