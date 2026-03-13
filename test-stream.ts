@@ -5,6 +5,7 @@ import { streamText } from 'ai';
 const vertex = createVertexAnthropic({
   project: process.env.VERTEX_PROJECT!,
   location: process.env.VERTEX_LOCATION!,
+  ...(process.env.VERTEX_BASE_URL && { baseURL: process.env.VERTEX_BASE_URL }),
 });
 
 const models = ['claude-opus-4-6', 'claude-sonnet-4-6', 'claude-haiku-4-5@20251001'];
@@ -16,7 +17,6 @@ for (const modelId of models) {
     model: vertex(modelId),
     prompt: 'Say "hello" in one word.',
     maxTokens: 10,
-    headers: { 'anthropic-beta': 'context-1m-2025-08-07' },
   });
 
   for await (const chunk of result.textStream) {
